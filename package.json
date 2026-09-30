@@ -2,6 +2,12 @@
   "name": "lyric-rep",
   "private": true,
   "version": "1.0.0",
+  "description": "A home for stray song lines. iPhone PWA on Cloudflare Workers + D1.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cobiadigital/lyric-rep"
+  },
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
@@ -10,5 +16,15 @@
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "DB": {
+        "description": "D1 database that stores your lyrics. A new one is created for you."
+      },
+      "APP_PASSWORD": {
+        "description": "Password you will type once on each device to unlock the app. Pick something only you know."
+      }
+    }
   }
 }

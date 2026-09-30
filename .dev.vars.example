@@ -1,0 +1,3 @@
+# Password required to use the app. Set it as a Secret named APP_PASSWORD on the Worker.
+# For local dev, copy this file to .dev.vars and change the value.
+APP_PASSWORD=change-me
