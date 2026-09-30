@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Lyric Rep</title>
+  <meta name="description" content="A home for stray song lines.">
+  <meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Lyrics">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Lyric Rep</h1>
+    <div class="top-actions">
+      <button class="icon-btn" id="shuffleBtn" aria-label="Shuffle">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      </button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <form id="composer" class="composer" autocomplete="off">
+      <textarea id="entry" rows="3" placeholder="A line, a fragment, a verse…" autocapitalize="sentences" spellcheck="true" enterkeyhint="enter"></textarea>
+      <div class="composer-bar">
+        <span id="status" class="status" aria-live="polite"></span>
+        <button type="submit" id="saveBtn" class="save-btn" disabled>Save</button>
+      </div>
+    </form>
+
+    <p class="list-label"><span id="count"></span></p>
+    <ul id="list" class="list"></ul>
+    <p id="empty" class="empty" hidden>Nothing here yet. Your first line goes above.</p>
+  </main>
+
+  <!-- Search overlay -->
+  <section id="search" class="overlay search" hidden aria-label="Search">
+    <div class="search-bar">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="q" type="search" placeholder="Search your lines" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="search">
+      </div>
+      <button class="text-btn" id="searchCancel">Cancel</button>
+    </div>
+    <div class="search-body">
+      <p id="searchHint" class="empty">Start typing to find a line.</p>
+      <ul id="results" class="list"></ul>
+    </div>
+  </section>
+
+  <!-- Entry actions -->
+  <div id="sheet" class="sheet-wrap" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Entry">
+      <textarea id="editBody" class="edit-body"></textarea>
+      <p id="editMeta" class="meta"></p>
+      <div class="sheet-actions">
+        <button class="sheet-btn" id="copyBtn">Copy</button>
+        <button class="sheet-btn primary" id="updateBtn">Save changes</button>
+        <button class="sheet-btn danger" id="deleteBtn">Delete</button>
+        <button class="sheet-btn" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password prompt (only shown if APP_PASSWORD is set on the Worker) -->
+  <div id="auth" class="sheet-wrap" hidden>
+    <div class="sheet-backdrop"></div>
+    <form class="sheet" id="authForm" autocomplete="on">
+      <h2>Unlock</h2>
+      <p class="meta">Enter your app password. It's remembered on this device.</p>
+      <input id="password" type="password" autocomplete="current-password" placeholder="Password">
+      <div class="sheet-actions">
+        <button class="sheet-btn primary" type="submit">Unlock</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
